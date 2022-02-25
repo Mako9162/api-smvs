@@ -45,22 +45,46 @@ function regController( req, res) {
         regi_longitud: req.body.regi_longitud,
         regi_velocidad: req.body.regi_velocidad,
         regi_vehi_id: req.body.regi_vehi_id
-      
-                
+                    
     };
 
-    jwt.verify(req.token, "smvssmvs", (err) => {
-        if(err){
-            res.send('Token no valido');
-        }else{
-            db.query(sql, customerObj, error => {
-                if (error) throw error; 
-                console.log(customerObj);
-                res.status(200).send('Guardado correctamente !');
+    // jwt.verify(req.token, "smvssmvs", (err) => {
+    //             if(err){
+    //                 res.send('Token no valido');
+    //             }else{
+        
+    //                 db.query(sql, customerObj, error => {
+    //                     if (error) throw error; 
+    //                     console.log(customerObj);
+    //                     res.status(200).send('Guardado correctamente !');
+    //                 });
+    //             }
+    //         });
+
+    const vehi =req.body.regi_vehi_id;
+
+    const sql1= `SELECT * FROM vehiculo WHERE vehi_id= ${vehi}` ;
+
+    db.query(sql1, (error, result) => {
+        if (error) throw error;
+        if (result.length > 0){
+            jwt.verify(req.token, "smvssmvs", (err) => {
+                if(err){
+                    res.send('Token no valido');
+                }else{
+        
+                    db.query(sql, customerObj, error => {
+                        if (error) throw error; 
+                        console.log(customerObj);
+                        res.status(200).send('Guardado correctamente !');
+                    });
+                }
             });
+        }else{
+            res.status(404).send('Este movil no esta ingresado en la base de datos SMVS!!!');
         }
     });
-    
+   
 };
 
 module.exports = {
