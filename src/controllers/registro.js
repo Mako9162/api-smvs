@@ -32,7 +32,7 @@ function regController( req, res) {
 
     const customerObj = {
 
-        regi_id: req.body.regi_id,
+        
         regi_altitud: req.body.regi_altitud,
         regi_azimut: req.body.regi_azimut,
         regi_fecha: req.body.regi_fecha,
@@ -48,18 +48,7 @@ function regController( req, res) {
                     
     };
 
-    // jwt.verify(req.token, "smvssmvs", (err) => {
-    //             if(err){
-    //                 res.send('Token no valido');
-    //             }else{
-        
-    //                 db.query(sql, customerObj, error => {
-    //                     if (error) throw error; 
-    //                     console.log(customerObj);
-    //                     res.status(200).send('Guardado correctamente !');
-    //                 });
-    //             }
-    //         });
+
 
     const vehi =req.body.regi_vehi_id;
 
@@ -81,7 +70,8 @@ function regController( req, res) {
                 }
             });
         }else{
-            res.status(404).send('Este movil no esta ingresado en la base de datos SMVS!!!');
+            console.log(`El Movil id: "${vehi}", no esta ingresado`);
+            res.status(404).send(`El Movil id: "${vehi}", no esta ingresado`);
         }
     });
    

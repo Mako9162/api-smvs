@@ -53,6 +53,7 @@ router.post('/geocerca', pass, geoc.geocController);
 //ruta de registros
 router.get('/registro/:regi_id', pass, regi.regidController);
 router.post('/registro', pass, regi.regController);
+// router.post('/registros', pass, regi.insController);
 
 //ruta de ruta
 router.get('/ruta/:ruta_id', pass, ruta.rutaidController);
