@@ -1,13 +1,13 @@
 //Conexión a la base de datos
 
 const mysql = require('mysql');
-const dot = require('dotenv').config()
+require('dotenv').config();
 const connection = mysql.createConnection({
   
-    host: process.env.MYSQLDB_HOST || '192.168.1.189',
-    user: process.env.MYSQLDB_USER || 'remo_smvs',
-    password: process.env.MYSQLDB_ROOT_PASSWORD || '1Q2w3e4r.',
-    database: process.env.MYSQLDB_DATABASE || 'smvs'
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    database: process.env.MYSQL_DATABASE 
 });
 
 connection.connect(error =>{
